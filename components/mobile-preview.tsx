@@ -1,4 +1,4 @@
-// Move the function definitions before they're used in useMemo
+"use client"
 
 // Helper function to adjust color brightness
 const adjustColor = (color: string, amount: number): string => {
@@ -128,9 +128,15 @@ const getBackgroundStyle = (settings: any) => {
   } else if (settings.themeColor === "custom") {
     // For custom themes
     if (settings.backgroundType === "gradient") {
-      style.background = `linear-gradient(135deg, ${settings.customBackground}, ${adjustColor(settings.customBackground, 40)})`
+      style.background = `linear-gradient(135deg, ${settings.customBackground}, ${adjustColor(
+        settings.customBackground,
+        40,
+      )})`
     } else if (settings.backgroundType === "animated") {
-      style.background = `linear-gradient(270deg, ${settings.customBackground}, ${adjustColor(settings.customBackground, 40)}, ${adjustColor(settings.customBackground, -40)})`
+      style.background = `linear-gradient(270deg, ${settings.customBackground}, ${adjustColor(
+        settings.customBackground,
+        40,
+      )}, ${adjustColor(settings.customBackground, -40)})`
       style.backgroundSize = "600% 600%"
       style.animation = "gradient-animation 10s ease infinite"
     } else if (settings.backgroundType === "image" && settings.imageUrl) {
@@ -301,7 +307,6 @@ const getSocialIconColors = (themeColor: string) => {
 
   return { backgroundColor, iconColor }
 }
-;("use client")
 
 import { useState, useEffect } from "react"
 import { cn } from "@/lib/utils"
@@ -316,23 +321,21 @@ export function MobilePreview() {
   const [mounted, setMounted] = useState(false)
   const { themeSettings } = useSettings()
 
-  // Update the useEffect to prevent unnecessary re-renders
   useEffect(() => {
     setMounted(true)
-    // No dependencies needed as this should only run once
   }, [])
 
-  // Ensure we're not causing unnecessary re-renders with theme changes
-  // by memoizing the style objects
+  // Memoize the style objects to prevent unnecessary re-renders
   const memoizedBackgroundStyle = React.useMemo(() => getBackgroundStyle(themeSettings), [themeSettings])
-
   const memoizedFontStyle = React.useMemo(
     () => getFontFamilyStyle(themeSettings.fontFamily || "default"),
     [themeSettings.fontFamily],
   )
 
   // Get social icon colors based on the current theme
-  const { backgroundColor: socialBgColor, iconColor: socialIconColor } = getSocialIconColors(themeSettings.themeColor)
+  const { backgroundColor: socialBgColor, iconColor: socialIconColor } = getSocialIconColors(
+    themeSettings.themeColor,
+  )
 
   const links = [
     {
@@ -349,7 +352,6 @@ export function MobilePreview() {
     },
   ]
 
-  // Get button style class based on settings
   const getButtonStyle = () => {
     let buttonClass = "rounded-md" // default
 
@@ -368,13 +370,11 @@ export function MobilePreview() {
     return buttonClass
   }
 
-  // Get button background and text colors based on theme
   const getButtonColors = (index: number) => {
     const style: React.CSSProperties = {
       color: themeSettings.buttonTextColor || themeSettings.customTextColor || "white",
     }
 
-    // Apply theme-specific button styling
     if (themeSettings.buttonColor) {
       style.backgroundColor = themeSettings.buttonColor
     }
@@ -387,7 +387,6 @@ export function MobilePreview() {
       style.boxShadow = themeSettings.buttonShadow
     }
 
-    // Apply active state
     if (activeLink === index) {
       if (themeSettings.themeColor === "botanical") {
         style.backgroundColor = "#2c4c56"
@@ -599,7 +598,6 @@ export function MobilePreview() {
   }
 
   if (!mounted) {
-    // Return a placeholder during SSR/hydration
     return (
       <div className="relative mx-auto w-[280px] md:w-[320px] opacity-0">
         <div className="relative mx-auto h-[580px] w-[280px] rounded-[40px] border-[10px] border-gray-800 bg-black shadow-xl md:h-[640px] md:w-[320px]"></div>
@@ -609,12 +607,8 @@ export function MobilePreview() {
 
   return (
     <div className="relative mx-auto w-[280px] md:w-[320px] transition-all duration-300">
-      {/* iPhone Frame */}
       <div className="relative mx-auto h-[580px] w-[280px] overflow-hidden rounded-[40px] border-[10px] border-gray-800 bg-black shadow-xl md:h-[640px] md:w-[320px] transition-all duration-300">
-        {/* Notch */}
         <div className="absolute left-1/2 top-0 z-20 h-6 w-40 -translate-x-1/2 rounded-b-xl bg-black"></div>
-
-        {/* Screen Content */}
         <div
           className={cn(
             "relative h-full w-full overflow-y-auto transition-colors duration-500",
@@ -647,7 +641,6 @@ export function MobilePreview() {
               </div>
             </div>
           )}
-          {/* Profile Header - Using the reusable ProfileCard component */}
           <div className={cn("pt-12 text-center", themeSettings.profileLayout === "hero" && "pt-0")}>
             <ProfileCard
               variant={themeSettings.profileLayout === "hero" ? "hero" : "compact"}
@@ -655,10 +648,7 @@ export function MobilePreview() {
               className="text-white [&_p]:text-white/70"
             />
           </div>
-
-          {/* Social Icons with Theme-Based Colors */}
           <div className="flex justify-center mt-4 gap-2">
-            {/* Instagram */}
             <div className="rounded-full p-2 transition-all duration-300" style={{ backgroundColor: socialBgColor }}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -678,8 +668,6 @@ export function MobilePreview() {
                 <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
               </svg>
             </div>
-
-            {/* Email */}
             <div className="rounded-full p-2 transition-all duration-300" style={{ backgroundColor: socialBgColor }}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -698,8 +686,6 @@ export function MobilePreview() {
                 <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
               </svg>
             </div>
-
-            {/* Facebook */}
             <div className="rounded-full p-2 transition-all duration-300" style={{ backgroundColor: socialBgColor }}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -717,8 +703,6 @@ export function MobilePreview() {
                 <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
               </svg>
             </div>
-
-            {/* YouTube */}
             <div className="rounded-full p-2 transition-all duration-300" style={{ backgroundColor: socialBgColor }}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -737,8 +721,6 @@ export function MobilePreview() {
                 <path d="m10 15 5-3-5-3z" />
               </svg>
             </div>
-
-            {/* Add */}
             <div className="rounded-full p-2 transition-all duration-300" style={{ backgroundColor: socialBgColor }}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -757,8 +739,6 @@ export function MobilePreview() {
               </svg>
             </div>
           </div>
-
-          {/* Links */}
           <div className="mt-6 px-4">
             {links.map((link, i) => (
               <div
@@ -774,11 +754,8 @@ export function MobilePreview() {
               </div>
             ))}
           </div>
-
-          {/* No more white cards - content ends after the links */}
         </div>
       </div>
     </div>
   )
 }
-
