@@ -1,0 +1,1004 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+
+    --primary: 271 91% 65%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 271 91% 65%;
+
+    --radius: 0.5rem;
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+
+    /* Additional color variables for components */
+    --success: 142 76% 36%;
+    --success-foreground: 210 40% 98%;
+
+    --warning: 38 92% 50%;
+    --warning-foreground: 210 40% 98%;
+
+    --info: 221 83% 53%;
+    --info-foreground: 210 40% 98%;
+
+    /* Theme toggle specific colors */
+    --theme-toggle-light: 47 95% 55%;
+    --theme-toggle-dark: 226 70% 55%;
+    --theme-toggle-system: 271 91% 65%;
+
+    /* Homepage specific variables */
+    --homepage-bg-from: 307 91% 16%; /* #4a044e - Dark purple */
+    --homepage-bg-to: 0 59% 31%; /* #7f1d1d - Dark red */
+    --homepage-text: 0 0% 100%; /* White */
+    --homepage-text-muted: 0 0% 100% / 0.8; /* White with opacity */
+
+    /* Spacing variables for consistency */
+    --space-1: 0.25rem;
+    --space-2: 0.5rem;
+    --space-3: 0.75rem;
+    --space-4: 1rem;
+    --space-5: 1.25rem;
+    --space-6: 1.5rem;
+    --space-8: 2rem;
+    --space-10: 2.5rem;
+    --space-12: 3rem;
+    --space-16: 4rem;
+    --space-20: 5rem;
+    --space-24: 6rem;
+
+    /* Transition variables */
+    --transition-fast: 150ms;
+    --transition-normal: 300ms;
+    --transition-slow: 500ms;
+    --transition-timing: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 271 91% 65%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 271 91% 65%;
+
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 0 0% 98%;
+    --sidebar-primary-foreground: 240 5.9% 10%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+
+    /* Additional color variables for components */
+    --success: 142 76% 45%;
+    --success-foreground: 210 40% 98%;
+
+    --warning: 38 92% 50%;
+    --warning-foreground: 210 40% 98%;
+
+    --info: 221 83% 65%;
+    --info-foreground: 210 40% 98%;
+
+    /* Theme toggle specific colors */
+    --theme-toggle-light: 47 95% 55%;
+    --theme-toggle-dark: 226 70% 55%;
+    --theme-toggle-system: 271 91% 65%;
+
+    /* Homepage specific variables - darker in dark mode */
+    --homepage-bg-from: 307 91% 11%; /* #2d1235 - Darker purple */
+    --homepage-bg-to: 0 59% 15%; /* #3b0d0d - Darker red */
+    --homepage-text: 0 0% 100%; /* White */
+    --homepage-text-muted: 0 0% 100% / 0.7; /* White with opacity */
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  /* Ensure the body background color changes in dark mode */
+  body {
+    @apply bg-background text-foreground;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  /* Fix for the main content area in dark mode */
+  .dark body {
+    @apply bg-background text-foreground;
+  }
+
+  /* Add these new utility classes for consistent layout */
+  .page-container {
+    @apply flex-1 p-4 md:p-8;
+  }
+
+  .page-header {
+    @apply mb-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between;
+  }
+
+  .page-title {
+    @apply text-2xl font-bold text-gray-900 dark:text-white transition-colors duration-300;
+  }
+
+  .page-description {
+    @apply text-sm text-gray-500 dark:text-gray-400 transition-colors duration-300;
+  }
+
+  .page-content {
+    @apply space-y-8;
+  }
+
+  .card-container {
+    @apply rounded-lg border bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800 transition-colors duration-300;
+  }
+
+  .card-header {
+    @apply mb-4 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between;
+  }
+
+  .card-title {
+    @apply text-lg font-semibold text-gray-900 dark:text-white transition-colors duration-300;
+  }
+
+  .card-description {
+    @apply text-sm text-gray-500 dark:text-gray-400 transition-colors duration-300;
+  }
+
+  .card-content {
+    @apply space-y-4;
+  }
+
+  .grid-layout {
+    @apply grid gap-6 md:grid-cols-2 lg:grid-cols-3;
+  }
+
+  .grid-layout-2-1 {
+    @apply grid grid-cols-1 gap-8 md:grid-cols-3;
+  }
+
+  .grid-layout-2-1 > div:first-child {
+    @apply md:col-span-2;
+  }
+
+  /* Improved responsive styles */
+  @media (max-width: 640px) {
+    .page-header {
+      @apply flex-col gap-4;
+    }
+
+    .card-header {
+      @apply flex-col gap-2;
+    }
+  }
+
+  /* Improved dark mode transitions */
+  .theme-transition {
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  /* Consistent button styles */
+  .action-button {
+    @apply flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-medium shadow-sm hover:bg-gray-50 dark:bg-gray-800 dark:text-white dark:hover:bg-gray-700 transition-colors duration-300;
+  }
+
+  .primary-button {
+    @apply bg-purple-600 text-white hover:bg-purple-700 dark:bg-purple-700 dark:hover:bg-purple-800 transition-colors duration-300;
+  }
+
+  /* Improved sidebar and navbar styles */
+  .sidebar {
+    @apply fixed inset-y-0 left-0 z-20 hidden w-64 border-r border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900 md:flex md:flex-col transition-colors duration-300;
+  }
+
+  .navbar {
+    @apply sticky top-0 z-30 flex h-16 w-full items-center justify-between border-b bg-white px-4 dark:border-gray-800 dark:bg-gray-900 md:px-6 transition-colors duration-300;
+  }
+
+  /* Improved mobile responsiveness */
+  @media (max-width: 768px) {
+    .hide-on-mobile {
+      @apply hidden;
+    }
+
+    .show-on-mobile {
+      @apply block;
+    }
+
+    .page-container {
+      @apply p-4;
+    }
+  }
+
+  /* Fix for the dashboard/Linktree page background in dark mode */
+  .dark .bg-gray-50 {
+    @apply bg-gray-900;
+  }
+
+  /* Fix for white backgrounds in dark mode */
+  .dark .bg-white {
+    @apply bg-gray-900;
+  }
+
+  /* Fix for card backgrounds in dark mode */
+  .dark .bg-card {
+    @apply bg-gray-900;
+  }
+
+  /* Fix for any explicit white backgrounds */
+  .dark [class*="bg-white"] {
+    @apply bg-gray-900;
+  }
+
+  /* Fix for any containers with white backgrounds */
+  .dark .container {
+    @apply bg-transparent;
+  }
+
+  /* Fix for any divs with white backgrounds */
+  .dark div[class*="bg-white"] {
+    @apply bg-gray-900;
+  }
+
+  /* Ensure text is readable in dark mode */
+  .dark .text-gray-900 {
+    @apply text-white;
+  }
+
+  .dark .text-gray-800 {
+    @apply text-gray-100;
+  }
+
+  .dark .text-gray-700 {
+    @apply text-gray-200;
+  }
+
+  .dark .text-gray-600 {
+    @apply text-gray-300;
+  }
+
+  .dark .text-gray-500 {
+    @apply text-gray-400;
+  }
+
+  /* Fix for borders in dark mode */
+  .dark .border {
+    @apply border-gray-700;
+  }
+
+  .dark .border-gray-200 {
+    @apply border-gray-700;
+  }
+
+  .dark .border-gray-300 {
+    @apply border-gray-600;
+  }
+
+  /* Fix for hover states */
+  .dark .hover\:bg-gray-50:hover {
+    @apply hover:bg-gray-800;
+  }
+
+  .dark .hover\:text-gray-900:hover {
+    @apply hover:text-white;
+  }
+
+  /* Fix for shadows in dark mode */
+  .dark .shadow-sm,
+  .dark .shadow,
+  .dark .shadow-md,
+  .dark .shadow-lg,
+  .dark .shadow-xl {
+    --tw-shadow-color: rgba(0, 0, 0, 0.3);
+  }
+
+  /* Improve contrast for better accessibility */
+  .dark a:not([class]) {
+    @apply text-primary underline-offset-4 hover:underline;
+  }
+
+  /* Ensure form elements have proper contrast */
+  .dark input::placeholder,
+  .dark textarea::placeholder {
+    @apply text-muted-foreground;
+  }
+
+  /* Homepage specific styles */
+  .homepage-gradient {
+    background: linear-gradient(to bottom, hsl(var(--homepage-bg-from)), hsl(var(--homepage-bg-to)));
+    transition: background 0.5s ease;
+  }
+
+  .homepage-text {
+    color: hsl(var(--homepage-text));
+    transition: color 0.3s ease;
+  }
+
+  .homepage-text-muted {
+    color: hsl(var(--homepage-text-muted));
+    transition: color 0.3s ease;
+  }
+
+  /* Add specific fixes for the dashboard/Linktree page */
+  .dashboard-container {
+    @apply bg-gray-50 dark:bg-gray-900 transition-colors duration-300;
+  }
+
+  /* Fix for the mobile preview in dark mode */
+  .mobile-preview {
+    @apply transition-colors duration-300;
+  }
+
+  /* Reduced motion preferences */
+  .motion-reduce * {
+    transition-duration: 0.001ms !important;
+    animation-duration: 0.001ms !important;
+  }
+
+  /* No animations */
+  .no-animations * {
+    transition: none !important;
+    animation: none !important;
+  }
+
+  /* Custom spring easing for theme toggle */
+  .ease-spring {
+    transition-timing-function: cubic-bezier(0.5, 0, 0.1, 1.5);
+  }
+
+  /* Homepage specific transitions */
+  .homepage-transition {
+    transition: all 0.5s ease;
+  }
+
+  /* High contrast mode improvements */
+  @media (forced-colors: active) {
+    .dark .border,
+    .dark [class*="border-"] {
+      border-color: CanvasText;
+    }
+
+    .dark button,
+    .dark [role="button"] {
+      border: 1px solid CanvasText;
+    }
+
+    /* Ensure theme toggle is visible in high contrast mode */
+    .theme-toggle-button {
+      border: 2px solid currentColor;
+    }
+
+    .theme-toggle-indicator {
+      background-color: currentColor;
+    }
+  }
+
+  /* Performance optimizations for theme transitions */
+  .will-change-theme {
+    will-change: background-color, color, border-color;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+  }
+
+  /* Prevent layout shifts during theme transitions */
+  .theme-stable-layout {
+    contain: layout;
+  }
+
+  /* Force dark mode for specific components that might be resistant to theme changes */
+  .dark [data-force-dark] {
+    @apply bg-gray-900 text-gray-100;
+  }
+
+  /* Focus styles for accessibility */
+  .focus-visible-ring {
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background;
+  }
+
+  /* Animated gradient backgrounds */
+  .animate-gradient-x {
+    animation: gradient-x 15s ease infinite;
+    background-size: 400% 400%;
+  }
+
+  @keyframes gradient-x {
+    0%,
+    100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+  }
+
+  @keyframes gradient-animation {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  /* Theme preview animations */
+  .theme-preview-enter {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  .theme-preview-enter-active {
+    opacity: 1;
+    transform: scale(1);
+    transition: opacity 300ms, transform 300ms;
+  }
+  .theme-preview-exit {
+    opacity: 1;
+  }
+  .theme-preview-exit-active {
+    opacity: 0;
+    transform: scale(0.95);
+    transition: opacity 300ms, transform 300ms;
+  }
+
+  /* Font imports for theme options */
+  @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap");
+
+  /* Add this at the end of the file */
+  /* Script to prevent flash of wrong theme */
+  :root {
+    color-scheme: light;
+  }
+
+  /* Ensure light mode is the default */
+  html:not(.dark) {
+    color-scheme: light;
+  }
+
+  /* Force light mode as default */
+  html {
+    background-color: white;
+    color: black;
+  }
+
+  /* Only apply dark mode styles when .dark class is present */
+  html.dark {
+    background-color: hsl(222.2 84% 4.9%);
+    color: hsl(210 40% 98%);
+    color-scheme: dark;
+  }
+
+  /* Fix for sidebar and main content layout */
+  @media (min-width: 768px) {
+    main {
+      padding-left: 0 !important; /* Override any inline padding */
+    }
+
+    /* Ensure content doesn't overlap with sidebar */
+    .sidebar-offset {
+      margin-left: 16rem; /* 64px (w-64) */
+    }
+  }
+
+  /* Add these specific styles to fix the dashboard layout */
+  @media (min-width: 768px) {
+    /* Ensure content doesn't overlap with sidebar */
+    .md\:ml-64 {
+      margin-left: 16rem !important; /* 64px (w-64) */
+    }
+
+    /* Fix for any potential z-index issues */
+    .sidebar {
+      z-index: 20;
+    }
+
+    /* Ensure main content has proper spacing */
+    main {
+      min-height: calc(100vh - 4rem); /* Subtract header height */
+    }
+  }
+
+  /* Mobile optimizations */
+  @media (max-width: 767px) {
+    .mobile-nav-open {
+      overflow: hidden;
+    }
+
+    /* Ensure content is properly spaced on mobile */
+    main {
+      padding-top: 1rem;
+      padding-bottom: 2rem;
+    }
+  }
+
+  /* Mobile optimizations */
+  @media (max-width: 767px) {
+    /* Ensure content is properly spaced on mobile */
+    .p-4 {
+      padding: 1rem !important;
+    }
+  }
+
+  /* Fix for consistent card styling across all pages */
+  .card {
+    @apply rounded-lg border bg-white dark:bg-gray-800 dark:border-gray-700 shadow-sm transition-colors duration-300;
+  }
+
+  /* Fix for consistent button styling across all pages */
+  .btn {
+    @apply rounded-md px-4 py-2 font-medium transition-colors duration-200;
+  }
+
+  .btn-primary {
+    @apply bg-purple-600 text-white hover:bg-purple-700 dark:bg-purple-700 dark:hover:bg-purple-800;
+  }
+
+  .btn-secondary {
+    @apply bg-gray-200 text-gray-800 hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600;
+  }
+
+  .btn-outline {
+    @apply border border-gray-300 bg-white text-gray-700 hover:bg-gray-50 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-700;
+  }
+
+  /* Fix for consistent form styling across all pages */
+  .form-input {
+    @apply rounded-md border border-gray-300 bg-white px-3 py-2 text-gray-700 shadow-sm focus:border-purple-500 focus:outline-none focus:ring-1 focus:ring-purple-500 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200;
+  }
+
+  .form-label {
+    @apply mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300;
+  }
+
+  .form-helper {
+    @apply mt-1 text-xs text-gray-500 dark:text-gray-400;
+  }
+
+  /* Fix for consistent table styling across all pages */
+  .table-container {
+    @apply overflow-x-auto rounded-lg border border-gray-200 dark:border-gray-700;
+  }
+
+  .table {
+    @apply min-w-full divide-y divide-gray-200 dark:divide-gray-700;
+  }
+
+  .table-header {
+    @apply bg-gray-50 dark:bg-gray-800;
+  }
+
+  .table-header-cell {
+    @apply px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500 dark:text-gray-400;
+  }
+
+  .table-body {
+    @apply divide-y divide-gray-200 bg-white dark:divide-gray-700 dark:bg-gray-900;
+  }
+
+  .table-row {
+    @apply hover:bg-gray-50 dark:hover:bg-gray-800;
+  }
+
+  .table-cell {
+    @apply whitespace-nowrap px-6 py-4 text-sm text-gray-500 dark:text-gray-400;
+  }
+
+  /* Fix for consistent chart styling across all pages */
+  .chart-container {
+    @apply h-80 w-full rounded-lg border border-gray-200 bg-white p-4 dark:border-gray-700 dark:bg-gray-800;
+  }
+
+  /* Fix for consistent grid styling across all pages */
+  .grid-container {
+    @apply grid gap-6;
+  }
+
+  .grid-cols-1-2 {
+    @apply grid-cols-1 md:grid-cols-2;
+  }
+
+  .grid-cols-1-3 {
+    @apply grid-cols-1 md:grid-cols-3;
+  }
+
+  .grid-cols-1-4 {
+    @apply grid-cols-1 md:grid-cols-2 lg:grid-cols-4;
+  }
+
+  /* Fix for consistent spacing across all pages */
+  .section {
+    @apply mb-8;
+  }
+
+  .section-title {
+    @apply mb-4 text-xl font-semibold text-gray-900 dark:text-white;
+  }
+
+  .section-description {
+    @apply mb-6 text-sm text-gray-500 dark:text-gray-400;
+  }
+
+  /* Fix for consistent mobile navigation */
+  .mobile-nav {
+    @apply fixed inset-0 z-50 bg-white dark:bg-gray-900 md:hidden;
+  }
+
+  .mobile-nav-header {
+    @apply flex h-16 items-center justify-between border-b border-gray-200 px-4 dark:border-gray-700;
+  }
+
+  .mobile-nav-content {
+    @apply p-4;
+  }
+
+  .mobile-nav-footer {
+    @apply border-t border-gray-200 p-4 dark:border-gray-700;
+  }
+
+  /* Fix for consistent sidebar styling */
+  .sidebar-item {
+    @apply flex items-center gap-3 rounded-lg px-3 py-2 text-gray-500 transition-all hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50;
+  }
+
+  .sidebar-item-active {
+    @apply bg-gray-100 text-gray-900 dark:bg-gray-800 dark:text-gray-50;
+  }
+
+  .sidebar-section {
+    @apply px-4 py-2;
+  }
+
+  .sidebar-section-title {
+    @apply mb-2 text-lg font-semibold tracking-tight text-gray-900 dark:text-white;
+  }
+
+  /* Fix for consistent navbar styling */
+  .navbar-item {
+    @apply flex items-center gap-2 px-3 py-2 text-sm font-medium text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white;
+  }
+
+  .navbar-button {
+    @apply rounded-full p-2 text-gray-500 hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-gray-300;
+  }
+
+  /* Fix for consistent avatar styling */
+  .avatar {
+    @apply flex h-8 w-8 items-center justify-center overflow-hidden rounded-full bg-gray-200 text-sm font-semibold text-gray-600 dark:bg-gray-700 dark:text-gray-300;
+  }
+
+  .avatar-lg {
+    @apply h-12 w-12 text-base;
+  }
+
+  .avatar-sm {
+    @apply h-6 w-6 text-xs;
+  }
+
+  /* Fix for consistent badge styling */
+  .badge {
+    @apply inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium;
+  }
+
+  .badge-primary {
+    @apply bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-300;
+  }
+
+  .badge-success {
+    @apply bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300;
+  }
+
+  .badge-warning {
+    @apply bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300;
+  }
+
+  .badge-danger {
+    @apply bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300;
+  }
+
+  .badge-info {
+    @apply bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300;
+  }
+
+  /* Fix for consistent dropdown styling */
+  .dropdown {
+    @apply relative;
+  }
+
+  .dropdown-menu {
+    @apply absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-gray-800 dark:ring-gray-700;
+  }
+
+  .dropdown-item {
+    @apply block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700;
+  }
+
+  /* Fix for consistent tooltip styling */
+  .tooltip {
+    @apply absolute z-10 rounded-md bg-gray-900 px-2 py-1 text-xs text-white shadow-sm dark:bg-gray-700;
+  }
+
+  /* Fix for consistent modal styling */
+  .modal-backdrop {
+    @apply fixed inset-0 z-40 bg-black bg-opacity-50 transition-opacity;
+  }
+
+  .modal {
+    @apply fixed inset-0 z-50 flex items-center justify-center p-4;
+  }
+
+  .modal-content {
+    @apply w-full max-w-md rounded-lg bg-white p-6 shadow-xl dark:bg-gray-800;
+  }
+
+  .modal-header {
+    @apply mb-4 flex items-center justify-between;
+  }
+
+  .modal-title {
+    @apply text-lg font-medium text-gray-900 dark:text-white;
+  }
+
+  .modal-body {
+    @apply mb-6;
+  }
+
+  .modal-footer {
+    @apply flex justify-end gap-2;
+  }
+
+  /* Fix for consistent alert styling */
+  .alert {
+    @apply mb-4 rounded-md p-4;
+  }
+
+  .alert-info {
+    @apply bg-blue-50 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300;
+  }
+
+  .alert-success {
+    @apply bg-green-50 text-green-800 dark:bg-green-900/30 dark:text-green-300;
+  }
+
+  .alert-warning {
+    @apply bg-yellow-50 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-300;
+  }
+
+  .alert-danger {
+    @apply bg-red-50 text-red-800 dark:bg-red-900/30 dark:text-red-300;
+  }
+
+  /* Fix for consistent progress bar styling */
+  .progress {
+    @apply h-2 w-full overflow-hidden rounded-full bg-gray-200 dark:bg-gray-700;
+  }
+
+  .progress-bar {
+    @apply h-full rounded-full bg-purple-600 transition-all dark:bg-purple-500;
+  }
+
+  /* Fix for consistent tabs styling */
+  .tabs {
+    @apply mb-4 border-b border-gray-200 dark:border-gray-700;
+  }
+
+  .tab {
+    @apply -mb-px inline-block border-b-2 border-transparent px-4 py-2 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700 dark:text-gray-400 dark:hover:border-gray-600 dark:hover:text-gray-300;
+  }
+
+  .tab-active {
+    @apply border-purple-500 text-purple-600 dark:border-purple-400 dark:text-purple-400;
+  }
+
+  .tab-content {
+    @apply py-4;
+  }
+
+  /* Fix for consistent pagination styling */
+  .pagination {
+    @apply flex justify-center gap-1;
+  }
+
+  .pagination-item {
+    @apply inline-flex h-8 w-8 items-center justify-center rounded-md border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700;
+  }
+
+  .pagination-item-active {
+    @apply border-purple-500 bg-purple-50 text-purple-600 dark:border-purple-400 dark:bg-purple-900/30 dark:text-purple-400;
+  }
+
+  /* Fix for consistent skeleton loading styling */
+  .skeleton {
+    @apply animate-pulse rounded bg-gray-200 dark:bg-gray-700;
+  }
+
+  .skeleton-text {
+    @apply h-4 w-3/4 rounded;
+  }
+
+  .skeleton-circle {
+    @apply h-12 w-12 rounded-full;
+  }
+
+  .skeleton-button {
+    @apply h-10 w-24 rounded-md;
+  }
+
+  /* Fix for consistent empty state styling */
+  .empty-state {
+    @apply flex flex-col items-center justify-center py-12 text-center;
+  }
+
+  .empty-state-icon {
+    @apply mb-4 h-16 w-16 text-gray-400 dark:text-gray-600;
+  }
+
+  .empty-state-title {
+    @apply mb-2 text-lg font-medium text-gray-900 dark:text-white;
+  }
+
+  .empty-state-description {
+    @apply mb-6 text-sm text-gray-500 dark:text-gray-400;
+  }
+
+  /* Fix for consistent scrollbar styling */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply rounded-full bg-gray-300 dark:bg-gray-600;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-gray-400 dark:bg-gray-500;
+  }
+
+  /* Fix for consistent print styling */
+  @media print {
+    .no-print {
+      display: none !important;
+    }
+
+    body {
+      background-color: white !important;
+      color: black !important;
+    }
+
+    .print-break-inside-avoid {
+      break-inside: avoid;
+    }
+
+    .print-break-after {
+      break-after: page;
+    }
+  }
+}
+
+/* Add these styles to ensure dialogs are properly positioned */
+@layer utilities {
+  .dialog-container {
+    position: relative;
+    z-index: 50;
+  }
+
+  /* Improve scrollbar styling for better UX in dialogs */
+  .dialog-scrollable {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--muted)) transparent;
+  }
+
+  .dialog-scrollable::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .dialog-scrollable::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .dialog-scrollable::-webkit-scrollbar-thumb {
+    background-color: hsl(var(--muted));
+    border-radius: 3px;
+  }
+
+  /* Prevent body scroll when dialog is open */
+  .dialog-open {
+    overflow: hidden;
+  }
+
+  /* Ensure dialogs are always on top */
+  #dialog-portal-root {
+    position: fixed;
+    z-index: 9999;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+  }
+
+  #dialog-portal-root > * {
+    pointer-events: auto;
+  }
+}
+/* Dialog specific styles to fix positioning issues */
+.dialog-open {
+  overflow: hidden !important;
+}
+
+/* Ensure dialogs are always visible in viewport */
+.dialog-centered {
+  position: fixed !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  max-height: 90vh !important;
+  max-width: 95vw !important;
+  width: 100% !important;
+  overflow-y: auto !important;
+}
+}
+
